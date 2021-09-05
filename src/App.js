@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React, { useState } from 'react'
+import './style.css'
+import DisplayItems from './displayItems';
+const App = () => {
+  const[setItem,setUpdateItem] = useState('');
+  const [items,setItems] = useState([]);
+  const itemEvent = (event) =>{
+    setUpdateItem(event.target.value);
+  }
+  const listOfItems = () => {
+      setItems((oldItems) => {
+          return [...oldItems,setItem];
+      });
+      setUpdateItem('');
+  }
+  const deleteItems = () =>{
+    console.log('delete');
+}
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main-div">
+    <h1>To DO List App</h1>
+      <div className="center-div">
+            <input type="text" placeholder="Enter an Items" value = { setItem }  onChange = {itemEvent}/>
+              <button className="todo-button" onClick={listOfItems}>+</button>
+              <ul>
+                    {
+                      items.map((itemvalue,index) => {
+                      return <DisplayItems key = {index} id = {index}  onSelect = {deleteItems} text = {itemvalue} 
+                        
+                      />
+                      
+                    })}
+              </ul>
+      </div>
     </div>
   );
 }
