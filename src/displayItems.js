@@ -1,11 +1,11 @@
 import React from 'react';
 import './style.css';
-const DisplayItems = (prop) =>{
+const DisplayItems = (props) =>{
      
     return (
     <div className="todo-style">
-    <i className = "fa fa-times-circle-o" onClick = {props.onSelect} aria-hidden="true"></i>
-     <li>{prop.text} </li>
+    <i className = "fa fa-times-circle-o" onClick = {() => { props.onSelect(props.id);} } aria-hidden="true"></i>
+     <li>{props.text} </li>
     </div>
     );
 };

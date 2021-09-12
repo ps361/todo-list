@@ -13,9 +13,13 @@ const App = () => {
       });
       setUpdateItem('');
   }
-  const deleteItems = () =>{
-    console.log('delete');
-}
+  const deleteItems = (id) =>{
+    setItems((oldItems) => {
+        return oldItems.filter((arrElem,index)=>{
+        return index !== id;
+    });
+});
+};
   
   return (
     <div className="main-div">
@@ -26,15 +30,14 @@ const App = () => {
               <ul>
                     {
                       items.map((itemvalue,index) => {
-                      return <DisplayItems key = {index} id = {index}  onSelect = {deleteItems} text = {itemvalue} 
-                        
+                      return( <DisplayItems key = {index} id = {index}  onSelect = {deleteItems} text = {itemvalue} 
                       />
-                      
+                      );
                     })}
               </ul>
       </div>
     </div>
+  
   );
 }
-
 export default App;
